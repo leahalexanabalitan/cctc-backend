@@ -30,28 +30,9 @@ exports.addUser = async (req, res) => {
         const { name, email, password } = req.body;
         const newUser = await User.create({ name, email, password });
         res.status(201).json({ message: 'User added successfully', data: newUser });
+        console.log("This is a demo for add user api");
     } catch (error) {
         res.status(500).json({ error: 'Failed to add user' });
     }
 };
 
-exports.updateUser = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { name, email } = req.body;
-        const updatedUser = await User.update({ name, email }, { where: { id } });
-        res.status(200).json({ message: 'User updated successfully', data: updatedUser });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to update user' });
-    }
-};
-
-exports.deleteUser = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await User.destroy({ where: { id } });
-        res.status(200).json({ message: 'User deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to delete user' });
-    }
-};
